@@ -141,8 +141,7 @@ def S0(four_bits):
     # First and fourth input bits are treated as a 2-bit number that specify the row
     row = int(four_bits[0] + four_bits[3], 2)
     # Second and third input bits specify a column of the S-box
-    column = int(four_bits[2] + four_bits[3], 2)
-    print(row, column)
+    column = int(four_bits[1] + four_bits[2], 2)
     box = [["01", "00", "11", "10"],
            ["11", "10", "01", "00"],
            ["00", "10", "01", "11"],
@@ -155,8 +154,7 @@ def S1(four_bits):
     # First and fourth input bits are treated as a 2-bit number that specify the row
     row = int(four_bits[0] + four_bits[3], 2)
     # Second and third input bits specify a column of the S-box
-    column = int(four_bits[2] + four_bits[3], 2)
-    print(row, column)
+    column = int(four_bits[1] + four_bits[2], 2)
     box = [["00", "01", "10", "11"],
            ["10", "00", "01", "11"],
            ["11", "00", "01", "00"],
@@ -201,13 +199,19 @@ def encryption(plaintext, key):
     left_input = f_k(left_input, right_input, k1)
     
     # Perform swap function
+    print("Start of swap function")
     left_input, right_input = SW(left_input, right_input)
+    print("-------------")
+    print("End of swap function")
     
+    # Now apply the function to the other half of the input
     left_input = f_k(left_input, right_input, k2)
     
     cyphertext = IP_1(left_input + right_input)
     
     print(f"Cyphertext: {cyphertext}")
+    
+    return cyphertext
 
 def main():
     # 10-bit key
@@ -217,12 +221,20 @@ def main():
     plaintext = "10010110"
     print(f"Plaintext: {plaintext}")
     # Generate subkeys from the key
+    print("-------------")
+    print("Start of key generation process")
     key = key_generation(key)
+    print("End of key generation process")
+    print("-------------")
     
     # Encrypt the plaintext using the key
-    encryption(plaintext, key)
-    
+    print("-------------")
+    print("Start of encryption process")
+    cyphertext = encryption(plaintext, key)
+    print("End of encryption process")
+    print("-------------")
     # Decrypt the plaintext using the key
+    
 
 if __name__ == "__main__":
     main()
