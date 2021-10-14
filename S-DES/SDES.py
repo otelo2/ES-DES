@@ -196,6 +196,7 @@ def encryption(plaintext, key):
     left_input = initial_permutation[0:4]
     right_input = initial_permutation[4:8]
     
+    # First round of f_k function
     left_input = f_k(left_input, right_input, k1)
     
     # Perform swap function
@@ -207,11 +208,38 @@ def encryption(plaintext, key):
     # Now apply the function to the other half of the input
     left_input = f_k(left_input, right_input, k2)
     
+    #Finally perform inverse initial permutation
     cyphertext = IP_1(left_input + right_input)
     
     print(f"Cyphertext: {cyphertext}")
     
     return cyphertext
+
+def decryption(cyphertext, key):
+    k1, k2 = key
+    initial_permutation = IP(cyphertext)
+    
+    left_input = initial_permutation[0:4]
+    right_input = initial_permutation[4:8]
+    
+    # First round of f_k function
+    left_input = f_k(left_input, right_input, k2)
+
+    # Perform swap function
+    print("Start of swap function")
+    left_input, right_input = SW(left_input, right_input)
+    print("-------------")
+    print("End of swap function")
+    
+    # Now apply the function to the other half of the input
+    left_input = f_k(left_input, right_input, k1)
+    
+    #Finally perform inverse initial permutation
+    plaintext = IP_1(left_input + right_input)
+    
+    print(f"Plaintext: {plaintext}")
+    
+    return plaintext
 
 def main():
     # 10-bit key
@@ -223,18 +251,30 @@ def main():
     # Generate subkeys from the key
     print("-------------")
     print("Start of key generation process")
-    key = key_generation(key)
+    generated_key = key_generation(key)
     print("End of key generation process")
     print("-------------")
     
     # Encrypt the plaintext using the key
     print("-------------")
     print("Start of encryption process")
-    cyphertext = encryption(plaintext, key)
+    cyphertext = encryption(plaintext, generated_key)
     print("End of encryption process")
     print("-------------")
-    # Decrypt the plaintext using the key
     
+    # Decrypt the plaintext using the key
+    print("-------------")
+    print("Start of decryption process")
+    decrypted_plaintext = decryption(cyphertext, generated_key)
+    print("End of decryption process")
+    print("-------------")
+    
+    # Show final results
+    print("------------")
+    print(f"Key: {key}")
+    print(f"Plaintext: {plaintext}")
+    print(f"Cyphertext: {cyphertext}")
+    print(f"Decrypted plaintext: {decrypted_plaintext}")
 
 if __name__ == "__main__":
     main()
