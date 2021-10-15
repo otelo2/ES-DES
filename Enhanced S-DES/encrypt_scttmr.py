@@ -28,7 +28,6 @@ def plaintext_into_columns(plaintext):
     
     # Add the columns into a list for ease of access when doing rounds
     columns = [column_1, column_2, column_3]
-    print_columns(columns)
     return columns
 
 def transposition(columns, round):
