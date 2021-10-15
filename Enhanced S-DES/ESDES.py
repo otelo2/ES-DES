@@ -96,21 +96,33 @@ def inverse_shift_row(rows):
 
 
 def main():
+    print("************")
     input_plaintext = "DID YOU SEE"
+    print(f"Plaintext: {input_plaintext}")
     SCT_result = simple_columnar_transposition(input_plaintext)
+    print(f"SCTTMR result: {SCT_result}")
+    
     # Encrypt using S-DES
-    key = key_generation("0010010111")
+    
+    key = "0010010111"
+    print(f"Key: {key}")
+    key = key_generation(key)
     # Turn the each letter of the input into binary
     binary_input = "".join(format(ord(i), "08b") for i in SCT_result)
     binary_input_list = [binary_input[i:i+8] for i in range(0, len(binary_input), 8)]
     # Encrypt each letter
+    print("************")
+    print("Start Enhanced S-DES encryption process")
     cyphertext = ""
     for binary_letter in binary_input_list:
         cyphertext += encryption(binary_letter, key)
+        print("Joining result with the rest of the cyphertext...")
+    print("************")
+    print("End of Enhanced S-DES encryption process")
     # Show the result as hex
     decimal_cypher = int(cyphertext, 2)
     hex_cypher = hex(decimal_cypher)
-    print(hex_cypher.capitalize())
+    print(f"Hex output of DES encryption: {hex_cypher}")
 
 if __name__ == "__main__":
     main()
