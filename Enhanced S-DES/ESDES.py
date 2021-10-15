@@ -4,6 +4,7 @@ from SDES.decrypter import decryption
 from encrypt_scttmr import simple_columnar_transposition
 from decrypt_scttmr import decrypt_simple_columnar_transformation
 
+
 # First process the Simple Columnar Transposition Technique with Multiple Rounds (SCTTMR)
 # Then the output comes from SCTTMR will gain indergone Shift Rows Stage (sic)
 # The plaintext message is first converted into the cipher text by using SCTTMR with min. 1 or 2 rounds
@@ -56,32 +57,33 @@ def main():
     decimal_cypher = int(cyphertext, 2)
     hex_cypher = hex(decimal_cypher)
     print(f"Hex output of DES encryption: {hex_cypher}")
-    
+    print(cyphertext)
     #
     # Decrypt using DES
     #
-    #
-    #print("************")
-    #print("Start Enhanced S-DES decryption process")
-    #cyphertext_binary_list = text_into_binary(cyphertext)
-    #
-    #binary_decryption = ""
-    #for cyphertext_fragment in cyphertext_binary_list:
-    #    binary_decryption += decryption(cyphertext_fragment, key) + " "
-    #    print("Joining result with the rest of the 'plaintext'...")
-    #print("************") 
-    #print("End of Enhanced S-DES decryption process")
-    ## Convert binary string to ascii string
-    #print(binary_decryption)
-    #
-    #plaintext_for_SCT = binary_into_text(binary_decryption)
-    #
-    #print(f"Plaintext for SCT: {plaintext_for_SCT}")
-    #
-    ## Start decryption of SCT
-    #
-    #decrypt_simple_columnar_transformation(plaintext_for_SCT)
     
+    print("\n************\n")
+    print("Start Enhanced S-DES decryption process")
+    # Divide the cyphertext into chunks of 8 bits
+    cyphertext_binary_list = [cyphertext[i:i+8] for i in range(0, len(cyphertext), 8)]
+
+    binary_decryption = ""
+    for cyphertext_fragment in cyphertext_binary_list:
+        binary_decryption += decryption(cyphertext_fragment, key) + " "
+        print("Joining result with the rest of the 'plaintext'...")
+    print("\n************") 
+    print("End of Enhanced S-DES decryption process")
+    
+    # Convert binary string to ascii string
+    plaintext_for_SCT = binary_into_text(binary_decryption)
+    
+    print(f"Plaintext for SCT: {plaintext_for_SCT}")
+    
+    # Start decryption of SCT
+    final_plaintext = decrypt_simple_columnar_transformation(plaintext_for_SCT)
+    print("\n***********")
+    print(f"Final plaintex result: {final_plaintext}")
+
 
 if __name__ == "__main__":
     main()

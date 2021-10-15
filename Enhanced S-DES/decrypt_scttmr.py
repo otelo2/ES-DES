@@ -12,10 +12,17 @@ def inverse_shift_row(rows):
     
     return rows
 
+def read_rows(rows):
+    round_1_result = ""
+    for num1 in range(3):
+        for num2 in range(3):
+            round_1_result += round_1_result.join((rows[num2][num1]))
+    return round_1_result
+
 def decrypt_simple_columnar_transformation(cyphertext):
     # Random selection of columns for the rounds
     round_1 = [2, 3, 1]
-    round_2 = [2, 3, 1]
+    round_2 = [3, 1, 2]
     
     # Write the plaintext into the columns
     columns = plaintext_into_columns(cyphertext)
@@ -29,10 +36,20 @@ def decrypt_simple_columnar_transformation(cyphertext):
     print(shifted)
     
     columns = plaintext_into_columns(shifted)
+    
+    # Perform first round of column transposition
+    columns = transposition(columns, round_2)
+    print("\nFirst round: ")
     print_columns(columns)
-    columns = transposition(columns, round_1)
+    result = read_columns(columns)
+    print(result)
+    
+    columns = plaintext_into_columns(result)
+    
+    # Perform first round of column transposition
+    columns = transposition(columns, round_2)
+    print("\nSecond round: ")
     print_columns(columns)
-    round_1_result = read_columns(columns)
-    columns = plaintext_into_columns(round_1_result)
-    print_columns(columns)
-    print(read_columns(columns))
+    final = read_rows(columns)
+    
+    return final
