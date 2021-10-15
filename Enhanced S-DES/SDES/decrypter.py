@@ -1,4 +1,4 @@
-from encrypter import IP, f_k, SW, IP_1
+from SDES.encrypter import IP, f_k, SW, IP_1
 
 def decryption(cyphertext, key):
     k1, k2 = key

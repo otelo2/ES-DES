@@ -1,5 +1,6 @@
 from SDES.encrypter import encryption
 from SDES.key_generator import key_generation
+from SDES.decrypter import decryption
 
 # First process the Simple Columnar Transposition Technique with Multiple Rounds (SCTTMR)
 # Then the output comes from SCTTMR will gain indergone Shift Rows Stage (sic)
@@ -123,6 +124,26 @@ def main():
     decimal_cypher = int(cyphertext, 2)
     hex_cypher = hex(decimal_cypher)
     print(f"Hex output of DES encryption: {hex_cypher}")
+    
+    # Decrypt using DES
+    print("************")
+    print("Start Enhanced S-DES decryption process")
+    cyphertext_binary_list = [cyphertext[i:i+8] for i in range(0, len(cyphertext), 8)]
+    binary_decryption = ""
+    for cyphertext_fragment in cyphertext_binary_list:
+        binary_decryption += decryption(cyphertext_fragment, key) + " "
+        print("Joining result with the rest of the 'plaintext'...")
+    print("************") 
+    print("End of Enhanced S-DES decryption process")
+    # Convert binary string to ascii string
+    print(binary_decryption)
+    plaintext_for_SCT = ""
+    for binary_value in binary_decryption.split():
+        an_int = int(binary_value, 2)
+        ascii_char = chr(an_int)
+        plaintext_for_SCT += ascii_char
+    
+    print(f"Plaintext for SCT: {plaintext_for_SCT}")
 
 if __name__ == "__main__":
     main()
