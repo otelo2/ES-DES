@@ -1,3 +1,6 @@
+from SDES.encrypter import encryption
+from SDES.key_generator import key_generation
+
 # First process the Simple Columnar Transposition Technique with Multiple Rounds (SCTTMR)
 # Then the output comes from SCTTMR will gain indergone Shift Rows Stage (sic)
 # The plaintext message is first converted into the cipher text by using SCTTMR with min. 1 or 2 rounds
@@ -71,6 +74,7 @@ def simple_columnar_transposition(plaintext):
     last_round_result = read_columns(columns)
     print(f"Result of round 2 of SCTTMR: {last_round_result}")
     
+    return last_round_result
 
 # Simple permutation
 def shift_row(rows):
@@ -93,7 +97,20 @@ def inverse_shift_row(rows):
 
 def main():
     input_plaintext = "DID YOU SEE"
-    simple_columnar_transposition(input_plaintext)
+    SCT_result = simple_columnar_transposition(input_plaintext)
+    # Encrypt using S-DES
+    key = key_generation("0010010111")
+    # Turn the each letter of the input into binary
+    binary_input = "".join(format(ord(i), "08b") for i in SCT_result)
+    binary_input_list = [binary_input[i:i+8] for i in range(0, len(binary_input), 8)]
+    # Encrypt each letter
+    cyphertext = ""
+    for binary_letter in binary_input_list:
+        cyphertext += encryption(binary_letter, key)
+    # Show the result as hex
+    decimal_cypher = int(cyphertext, 2)
+    hex_cypher = hex(decimal_cypher)
+    print(hex_cypher.capitalize())
 
 if __name__ == "__main__":
     main()
