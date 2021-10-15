@@ -37,6 +37,7 @@ def plaintext_into_columns(plaintext):
     
     # Add the columns into a list for ease of access when doing rounds
     columns = [column_1, column_2, column_3]
+    print_columns(columns)
     return columns
 
 def transposition(columns, round):
@@ -62,7 +63,7 @@ def simple_columnar_transposition(plaintext):
     # Write the plaintext into the columns
     columns = plaintext_into_columns(round_1_result)
     
-    # Perform the first column transposition round
+    # Perform the second column transposition round
     columns = transposition(columns, round_2)
     
     # Read in columns
@@ -91,9 +92,37 @@ def shift_row(rows):
 def inverse_shift_row(rows):
     # First row is not altered.
     # Second row is circular left shifted 2 bytes
-    rows[1][0], rows[1][1], rows[1][2] = rows[1][2], rows[1][0], rows[1][1]
+    print_columns(rows)
+    rows[0][1], rows[1][1], rows[2][1] = rows[2][1], rows[0][1], rows[1][1]
     # Third row is circular left shifter 1 byte
-    rows[2][0], rows[2][1], rows[2][2] = rows[2][1], rows[2][2], rows[2][0]
+    rows[0][2], rows[1][2], rows[2][2] = rows[1][2], rows[2][2], rows[0][2]
+    
+    return rows
+
+def decrypt_simple_columnar_transformation(cyphertext):
+    # Random selection of columns for the rounds
+    round_1 = [2, 3, 1]
+    round_2 = [2, 3, 1]
+    
+    # Write the plaintext into the columns
+    columns = plaintext_into_columns(cyphertext)
+    print_columns(columns)
+    
+    # Perform inverse row shift
+    columns = inverse_shift_row(columns)
+    print("Inverse shift row: ")
+    print_columns(columns)
+    shifted = read_columns(columns)
+    print(shifted)
+    
+    columns = plaintext_into_columns(shifted)
+    print_columns(columns)
+    columns = transposition(columns, round_1)
+    print_columns(columns)
+    round_1_result = read_columns(columns)
+    columns = plaintext_into_columns(round_1_result)
+    print_columns(columns)
+    print(read_columns(columns))
 
 
 def main():
@@ -144,6 +173,17 @@ def main():
         plaintext_for_SCT += ascii_char
     
     print(f"Plaintext for SCT: {plaintext_for_SCT}")
+    
+    # Start decryption of SCT
+    
+    columns = plaintext_into_columns(plaintext_for_SCT)
+    print("I wonder", read_columns(columns))
+    columns = inverse_shift_row(columns)
+    print_columns(columns)
+    input = read_columns(columns)
+    print("end me:",input)
+    simple_columnar_transposition(input)
+    
 
 if __name__ == "__main__":
     main()
