@@ -23,13 +23,13 @@ def IP_1(input):
     return permutated_input
 
 # Combination of permutation and substitution functions
-def f_k(left_input, right_input, key):
+def f_k(left_input, right_input, subkey):
     L = left_input
     R = right_input
     
     # Apply the f_k formula, which is an XOR between the L and the output of the function F
     new_L = ""
-    F_function_result = F(R, key)
+    F_function_result = F(R, subkey)
     for index, bit in enumerate(L):
         new_L += XOR(bit, F_function_result[index])
     print(f"New L output: {new_L}")
