@@ -19,13 +19,13 @@ def read_rows(rows):
             round_1_result += round_1_result.join((rows[num2][num1]))
     return round_1_result
 
-def decrypt_simple_columnar_transformation(cyphertext):
+def decrypt_simple_columnar_transformation(ciphertext):
     # Random selection of columns for the rounds
-    round_1 = [2, 3, 1]
+    round_1 = [3, 1, 2]
     round_2 = [3, 1, 2]
     
     # Write the plaintext into the columns
-    columns = plaintext_into_columns(cyphertext)
+    columns = plaintext_into_columns(ciphertext)
     print_columns(columns)
     
     # Perform inverse row shift

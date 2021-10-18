@@ -75,12 +75,12 @@ def main():
     print("End of Enhanced S-DES decryption process")
     
     # Convert binary string to ascii string
-    plaintext_for_SCT = binary_into_text(binary_decryption)
+    ciphertext_for_SCT = binary_into_text(binary_decryption)
     
-    print(f"Plaintext for SCT: {plaintext_for_SCT}")
+    print(f"Ciphertext for SCT: {ciphertext_for_SCT}")
     
     # Start decryption of SCT
-    final_plaintext = decrypt_simple_columnar_transformation(plaintext_for_SCT)
+    final_plaintext = decrypt_simple_columnar_transformation(ciphertext_for_SCT)
     print("\n***********")
     print(f"Final plaintex result: {final_plaintext}")
 
