@@ -4,10 +4,10 @@ from encrypt_scttmr import plaintext_into_columns, print_columns, read_columns, 
 # Simple permutation
 def inverse_shift_row(rows):
     # First row is not altered.
-    # Second row is circular left shifted 2 bytes
+    # Second row is circular left shifted 2 bits
     print_columns(rows)
     rows[0][1], rows[1][1], rows[2][1] = rows[2][1], rows[0][1], rows[1][1]
-    # Third row is circular left shifter 1 byte
+    # Third row is circular left shifter 1 bit
     rows[0][2], rows[1][2], rows[2][2] = rows[1][2], rows[2][2], rows[0][2]
     
     return rows
