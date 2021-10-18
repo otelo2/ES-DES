@@ -58,6 +58,7 @@ def main():
     hex_cipher = hex(decimal_cipher)
     print(f"Hex output of DES encryption: {hex_cipher}")
     print(ciphertext)
+    
     #
     # Decrypt using DES
     #
@@ -66,7 +67,6 @@ def main():
     print("Start Enhanced S-DES decryption process")
     # Divide the cyphertext into chunks of 8 bits
     ciphertext_binary_list = [ciphertext[i:i+8] for i in range(0, len(ciphertext), 8)]
-
     binary_decryption = ""
     for ciphertext_fragment in ciphertext_binary_list:
         binary_decryption += decryption(ciphertext_fragment, key) + " "

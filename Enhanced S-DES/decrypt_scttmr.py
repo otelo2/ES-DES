@@ -24,7 +24,7 @@ def decrypt_simple_columnar_transformation(ciphertext):
     round_1 = [3, 1, 2]
     round_2 = [3, 1, 2]
     
-    # Write the plaintext into the columns
+    # Write the ciphertext into the columns
     columns = plaintext_into_columns(ciphertext)
     print_columns(columns)
     
@@ -38,7 +38,7 @@ def decrypt_simple_columnar_transformation(ciphertext):
     columns = plaintext_into_columns(shifted)
     
     # Perform first round of column transposition
-    columns = transposition(columns, round_2)
+    columns = transposition(columns, round_1)
     print("\nFirst round: ")
     print_columns(columns)
     result = read_columns(columns)
@@ -46,7 +46,7 @@ def decrypt_simple_columnar_transformation(ciphertext):
     
     columns = plaintext_into_columns(result)
     
-    # Perform first round of column transposition
+    # Perform second round of column transposition
     columns = transposition(columns, round_2)
     print("\nSecond round: ")
     print_columns(columns)
