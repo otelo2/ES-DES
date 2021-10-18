@@ -32,7 +32,7 @@ def P10(key):
     print(f"P10 output: {permutated_key}")
     return permutated_key
 
-# Picks out and permutes 8 og the 10 bits
+# Picks out and permutes 8 of the 10 bits
 def P8(key):
     # Output
     permutated_key = ""
