@@ -47,7 +47,7 @@ def F(input, subkey):
     for position in expansion_permutation_table:
         permutated_input += input[position-1]
 
-    print(f"F function output: {permutated_input}")
+    print(f"F function P/E output: {permutated_input}")
     
     # The 8-bit subkey k1 is added to this value using XOR
     P_string = ""
