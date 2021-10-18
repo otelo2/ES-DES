@@ -140,8 +140,8 @@ def encryption(plaintext, key):
     left_input = f_k(left_input, right_input, k2)
     
     #Finally perform inverse initial permutation
-    cyphertext = IP_1(left_input + right_input)
+    ciphertext = IP_1(left_input + right_input)
     
-    print(f"Cyphertext: {cyphertext}")
+    print(f"Cyphertext: {ciphertext}")
     
-    return cyphertext
+    return ciphertext

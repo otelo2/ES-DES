@@ -19,14 +19,14 @@ def main():
     # Encrypt the plaintext using the key
     print("-------------")
     print("Start of encryption process")
-    cyphertext = encryption(plaintext, generated_key)
+    ciphertext = encryption(plaintext, generated_key)
     print("End of encryption process")
     print("-------------")
     
     # Decrypt the plaintext using the key
     print("-------------")
     print("Start of decryption process")
-    decrypted_plaintext = decryption(cyphertext, generated_key)
+    decrypted_plaintext = decryption(ciphertext, generated_key)
     print("End of decryption process")
     print("-------------")
     
@@ -34,7 +34,7 @@ def main():
     print("------------")
     print(f"Key: {key}")
     print(f"Plaintext: {plaintext}")
-    print(f"Cyphertext: {cyphertext}")
+    print(f"Cyphertext: {ciphertext}")
     print(f"Decrypted plaintext: {decrypted_plaintext}")
 
 if __name__ == "__main__":
