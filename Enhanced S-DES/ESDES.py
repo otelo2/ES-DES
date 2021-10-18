@@ -31,7 +31,7 @@ def main():
     input_plaintext = "DID YOU SEE"
     print(f"Plaintext: {input_plaintext}")
     SCT_result = simple_columnar_transposition(input_plaintext)
-    print(f"SCTTMR result: {SCT_result}")
+    print(f"SCTTMR + row shift result: {SCT_result}")
     
     #
     # Encrypt using S-DES
@@ -67,6 +67,7 @@ def main():
     print("Start Enhanced S-DES decryption process")
     # Divide the cyphertext into chunks of 8 bits
     ciphertext_binary_list = [ciphertext[i:i+8] for i in range(0, len(ciphertext), 8)]
+    print(ciphertext_binary_list)
     binary_decryption = ""
     for ciphertext_fragment in ciphertext_binary_list:
         binary_decryption += decryption(ciphertext_fragment, key) + " "

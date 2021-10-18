@@ -61,10 +61,9 @@ def simple_columnar_transposition(plaintext):
     print(f"Result of round 2 of SCTTMR: {round_2_result}")
     
     columns = shift_row(columns)
-    print_columns(columns)
     
     last_round_result = read_columns(columns)
-    print(f"Result of round 2 of SCTTMR: {last_round_result}")
+    print(f"Result of row shift: {last_round_result}")
     
     return last_round_result
 

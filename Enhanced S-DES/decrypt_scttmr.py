@@ -5,7 +5,6 @@ from encrypt_scttmr import plaintext_into_columns, print_columns, read_columns, 
 def inverse_shift_row(rows):
     # First row is not altered.
     # Second row is circular left shifted 2 bits
-    print_columns(rows)
     rows[0][1], rows[1][1], rows[2][1] = rows[2][1], rows[0][1], rows[1][1]
     # Third row is circular left shifter 1 bit
     rows[0][2], rows[1][2], rows[2][2] = rows[1][2], rows[2][2], rows[0][2]
@@ -26,7 +25,6 @@ def decrypt_simple_columnar_transformation(ciphertext):
     
     # Write the ciphertext into the columns
     columns = plaintext_into_columns(ciphertext)
-    print_columns(columns)
     
     # Perform inverse row shift
     columns = inverse_shift_row(columns)
