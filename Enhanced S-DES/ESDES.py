@@ -46,18 +46,18 @@ def main():
     print("Start Enhanced S-DES encryption process")
     
     binary_input_list = text_into_binary(SCT_result)
-    cyphertext = ""
+    ciphertext = ""
     print(binary_input_list)
     for binary_letter in binary_input_list:
-        cyphertext += encryption(binary_letter, key)
-        print("Joining result with the rest of the cyphertext...")
+        ciphertext += encryption(binary_letter, key)
+        print("Joining result with the rest of the ciphertext...")
     print("************")
     print("End of Enhanced S-DES encryption process")
     # Show the result as hex
-    decimal_cypher = int(cyphertext, 2)
-    hex_cypher = hex(decimal_cypher)
-    print(f"Hex output of DES encryption: {hex_cypher}")
-    print(cyphertext)
+    decimal_cipher = int(ciphertext, 2)
+    hex_cipher = hex(decimal_cipher)
+    print(f"Hex output of DES encryption: {hex_cipher}")
+    print(ciphertext)
     #
     # Decrypt using DES
     #
@@ -65,11 +65,11 @@ def main():
     print("\n************\n")
     print("Start Enhanced S-DES decryption process")
     # Divide the cyphertext into chunks of 8 bits
-    cyphertext_binary_list = [cyphertext[i:i+8] for i in range(0, len(cyphertext), 8)]
+    ciphertext_binary_list = [ciphertext[i:i+8] for i in range(0, len(ciphertext), 8)]
 
     binary_decryption = ""
-    for cyphertext_fragment in cyphertext_binary_list:
-        binary_decryption += decryption(cyphertext_fragment, key) + " "
+    for ciphertext_fragment in ciphertext_binary_list:
+        binary_decryption += decryption(ciphertext_fragment, key) + " "
         print("Joining result with the rest of the 'plaintext'...")
     print("\n************") 
     print("End of Enhanced S-DES decryption process")
